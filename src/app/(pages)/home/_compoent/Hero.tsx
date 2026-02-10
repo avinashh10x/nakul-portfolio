@@ -3,6 +3,7 @@ import HeroText from "@/component/HeroText";
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { heroData } from "@/data/siteData";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -36,17 +37,17 @@ function Hero() {
     <>
       <div
         ref={containerRef}
-        className="bg-[#4E94C2]  h-[100vh] w-full relative overflow-hidden  "
+        className="bg-[#4E94C2] h-[85vh] md:h-screen! w-full relative"
       >
-        <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#4E94C2] ">
+        <div className="sticky top-0 h-screen!  w-full overflow-hidden bg-[#4E94C2]">
           <video
             ref={videoRef}
-            src="https://framerusercontent.com/assets/vByUTRpjIKiQC9dZga6fw6PQLM.mp4"
+            src={heroData.videoUrl}
             autoPlay
             loop
             muted
             playsInline
-            className="absolute top-0 left-0 w-full h-full object-cover "
+            className="absolute top-0 left-0 w-full h-screen! object-cover "
             style={{ mixBlendMode: "screen" }}
           />
         </div>
@@ -55,15 +56,11 @@ function Hero() {
         <HeroText />
       </div>
       <div className="absolute bottom-50 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-        <img
-          src="https://framerusercontent.com/images/ooyYK8koXxi95QXafRKMXtdbVSA.gif"
-          alt=""
-          className="h-16"
-        />
+        <img src={heroData.scrollGifUrl} alt="" className="h-16" />
       </div>
-      <div className="absolute top-[150%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
-        <p className="md:text-5xl text-[5vw] font-bold whitespace-nowrap text-center">
-          Let me take you <br /> through a journey of
+      <div className="absolute top-[120%] md:top-[150%]  left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center w-full">
+        <p className="md:text-5xl text-[8vw] font-bold whitespace-nowrap text-center">
+          {heroData.headingLine1} <br /> {heroData.headingLine2}
         </p>
       </div>
     </>

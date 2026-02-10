@@ -15,7 +15,6 @@ function Navbar() {
     { name: "Home", href: "/" },
     { name: "Works", href: "/work" },
     { name: "About me", href: "/about" },
-    { name: "Resume", href: "/resume" },
     { name: "Contact me", href: "/contact" },
   ];
 

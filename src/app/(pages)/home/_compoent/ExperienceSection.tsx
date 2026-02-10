@@ -2,6 +2,7 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { experienceData } from "@/data/siteData";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,109 +16,82 @@ interface Slide {
 }
 
 function ExperienceSection() {
-  const scrollTextRef = useRef<HTMLParagraphElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const stackContainerRef = useRef<HTMLDivElement>(null);
 
-  const slides: Slide[] = [
-    {
-      title: "Storytelling",
-      text: "Every frame tells a story. I craft compelling narratives through precise cuts, seamless transitions, and emotional pacing that captivates audiences and brings your vision to life.",
-      num: "(01)",
-      image:
-        "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&q=80",
-      bgColor: "bg-[#F1F1F1]",
-      textColor: "text-[#121212]",
-    },
-    {
-      title: "Technical Mastery",
-      text: "From color grading to motion graphics, I leverage industry-standard tools like Premiere Pro, After Effects, and DaVinci Resolve to deliver professional-grade content that exceeds expectations.",
-      num: "(02)",
-      image:
-        "https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=800&q=80",
-      bgColor: "bg-[#C4EF7A]",
-      textColor: "text-[#527200]",
-    },
-    {
-      title: "Creative Vision",
-      text: "I don't just edit footage—I transform raw content into cinematic experiences. With a keen eye for composition, rhythm, and visual aesthetics, I elevate every project to its full potential.",
-      num: "(03)",
-      image:
-        "https://images.unsplash.com/photo-1536240478700-b869070f9279?w=800&q=80",
-      bgColor: "bg-[#FC4C3B]",
-      textColor: "text-white",
-    },
-    {
-      title: "Client Collaboration",
-      text: "Your vision is my priority. I work closely with clients through every stage—from initial concept to final delivery—ensuring the end result perfectly aligns with your goals and brand identity.",
-      num: "(04)",
-      image:
-        "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80",
-      bgColor: "bg-[#F1F1F1]",
-      textColor: "text-[#121212]",
-    },
-    {
-      title: "Trend Awareness",
-      text: "The digital landscape evolves fast. I stay ahead of the curve with the latest editing techniques, trending formats, and platform-specific optimization to keep your content fresh and engaging.",
-      num: "(05)",
-      image:
-        "https://images.unsplash.com/photo-1611162616475-46b635cb6868?w=800&q=80",
-      bgColor: "bg-[#C4EF7A]",
-      textColor: "text-[#527200]",
-    },
-  ];
+  const slides: Slide[] = experienceData.slides;
 
   useEffect(() => {
-    if (!sectionRef.current || !scrollTextRef.current) return;
+    if (!sectionRef.current || !stackContainerRef.current) return;
 
-    // Hide "Scroll" text when section starts
-    gsap.to(scrollTextRef.current, {
-      autoAlpha: 0,
-      duration: 0.2,
+    const cards = gsap.utils.toArray<HTMLElement>(".experience-card");
+    const totalCards = cards.length;
+
+    // Only enough scroll for cards to stack — no exit animation needed.
+    // Section unpins immediately after last card, next content scrolls naturally.
+    const totalScrollLength = (totalCards - 1) * window.innerHeight * 0.7;
+
+    // Set first card visible immediately
+    gsap.set(cards[0], { y: 0, scale: 1, rotation: 0, autoAlpha: 1 });
+
+    // Set all other cards below the viewport (ready to slide up)
+    cards.forEach((card, i) => {
+      if (i > 0) {
+        gsap.set(card, {
+          y: window.innerHeight,
+          scale: 1,
+          rotation: 0,
+          autoAlpha: 1,
+        });
+      }
+      // z-index: later cards on top
+      card.style.zIndex = String(i + 1);
+    });
+
+    const masterTl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
         start: "top top",
-        end: "top top-=1",
-        toggleActions: "play none reverse none",
+        end: `+=${totalScrollLength}`,
+        scrub: 0.5,
+        pin: true,
+        anticipatePin: 1,
       },
     });
 
-    // Animate each slide
-    const slideElements = document.querySelectorAll(".experience-slide");
+    // For each card (except the first), animate it sliding up into the stack.
+    cards.forEach((card, i) => {
+      if (i === 0) return;
 
-    slideElements.forEach((slide) => {
-      const contentWrapper = slide.querySelector(
-        ".content-wrapper",
-      ) as HTMLElement;
-      const content = slide.querySelector(".content") as HTMLElement;
+      const label = `card${i}`;
+      masterTl.addLabel(label);
 
-      if (!contentWrapper || !content) return;
-
-      // 3D rotation and scale animation
-      gsap.to(content, {
-        rotationZ: (Math.random() - 0.5) * 10, // Random rotation between -5 and 5 degrees
-        scale: 0.7,
-        rotationX: 40,
-        ease: "power1.in",
-        scrollTrigger: {
-          pin: contentWrapper,
-          trigger: slide,
-          start: "top 0%",
-          end: `+=${window.innerHeight}`,
-          scrub: true,
+      // Animate new card sliding up from below
+      masterTl.to(
+        card,
+        {
+          y: 0,
+          duration: 1,
+          ease: "power2.out",
         },
-      });
+        label,
+      );
 
-      // Fade out animation
-      gsap.to(content, {
-        autoAlpha: 0,
-        ease: "power1.in",
-        scrollTrigger: {
-          trigger: content,
-          start: "top -80%",
-          end: `+=${0.2 * window.innerHeight}`,
-          scrub: true,
-        },
-      });
+      // Simultaneously scale down & rotate all previously stacked cards
+      for (let j = 0; j < i; j++) {
+        const stackOffset = i - j;
+        masterTl.to(
+          cards[j],
+          {
+            scale: 1 - stackOffset * 0.04,
+            rotation: stackOffset * (j % 2 === 0 ? -1.5 : 1.5),
+            y: -stackOffset * 15,
+            duration: 1,
+            ease: "power2.out",
+          },
+          label,
+        );
+      }
     });
 
     return () => {
@@ -126,46 +100,47 @@ function ExperienceSection() {
   }, []);
 
   return (
-    <section className="relative">
-      <div className="text-6xl font-bold text-center absolute left-1/2  -translate-x-1/2 z-10 top-52">
-        <h3>Experiences</h3>
+    <>
+      {/* Heading scrolls away naturally before cards pin */}
+      <div className="bg-[#ffffff] pt-96 text-center text-black">
+        <h3 className="text-6xl font-bold">{experienceData.heading}</h3>
         <br />
-        <p className="text-2xl">
-          A timeline of roles, collaborations, апа learnings that shaped how |
-          think and design today.
+        <p className="text-2xl max-w-2xl mx-auto">
+          {experienceData.subheading}
         </p>
       </div>
-      <div
-        ref={sectionRef}
-        className="relative overflow-hidden py-[100vh] bg-[#4E94C2]"
-      >
-        <p
-          ref={scrollTextRef}
-          className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#F1F1F1] text-2xl font-medium"
-        ></p>
 
-        <div>
-          {slides.map((slide, index) => (
-            <div key={index} className="experience-slide h-screen ">
+      <section className="relative">
+        <div
+          ref={sectionRef}
+          className="relative h-screen overflow-hidden bg-[#ffffff]"
+        >
+          {/* Stack container – all cards are absolutely positioned inside */}
+          <div
+            ref={stackContainerRef}
+            className="absolute inset-0 flex items-center justify-center"
+            style={{ perspective: "1200px" }}
+          >
+            {slides.map((slide, index) => (
               <div
-                className="content-wrapper w-full h-full"
-                style={{ perspective: "250vw" }}
+                key={index}
+                className="experience-card absolute w-[90vw] h-[60vh] md:w-[60vw] md:h-[60vh]"
+                style={{
+                  transformStyle: "preserve-3d",
+                  willChange: "transform",
+                }}
               >
                 <div
-                  className={`content absolute inset-0 ${slide.bgColor} ${slide.textColor} px-6 py-6 md:px-12 md:py-6 flex flex-col justify-between`}
-                  style={{
-                    transformStyle: "preserve-3d",
-                    transformOrigin: "50% 10%",
-                  }}
+                  className={`w-full h-full ${slide.bgColor} ${slide.textColor} px-5 py-5 md:px-12 md:py-6 flex flex-col justify-between rounded-lg shadow-2xl overflow-hidden`}
                 >
                   {/* Top section */}
-                  <div className="flex justify-between items-center">
-                    <p className="text-[8.5vw] font-medium leading-[0.9] tracking-[-0.06em]">
+                  <div className="flex justify-between items-start">
+                    <p className="text-[12vw] md:text-[5vw] font-medium leading-[0.9] tracking-[-0.06em]">
                       {slide.title}
                     </p>
                     {/* SVG Icon */}
                     <svg
-                      className="w-[5.7vw] h-auto block"
+                      className="w-[6vw] md:w-[2vw] h-auto block shrink-0 mt-1"
                       width="81"
                       height="82"
                       viewBox="0 0 81 82"
@@ -179,27 +154,34 @@ function ExperienceSection() {
                     </svg>
                   </div>
 
-                  {/* Bottom section */}
-                  <div className="flex justify-between items-end gap-4">
-                    <p className="w-[32vw] text-[1.6vw] font-medium leading-[1.1] tracking-[-0.03em] flex items-end">
-                      {slide.text}
-                    </p>
-                    <div className="flex gap-6 text-[8.5vw] font-medium leading-[0.9] tracking-[-0.06em]">
-                      <p className="num">{slide.num}</p>
+                  {/* Bottom section — stacked on mobile, side-by-side on desktop */}
+                  <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-3 md:gap-4">
+                    <div className="flex items-end justify-between w-full md:w-auto gap-3">
+                      <p className="md:w-[28vw] w-full text-left text-[5vw] md:text-[2vw] font-medium leading-[1.1] tracking-[-0.03em]">
+                        {slide.text}
+                      </p>
+                      <p className="text-[12vw] md:text-[2vw] font-medium leading-[0.9] tracking-[-0.06em] shrink-0 md:hidden">
+                        {slide.num}
+                      </p>
+                    </div>
+                    <div className="flex gap-4 md:gap-6 items-end w-full md:w-auto">
+                      <p className="hidden md:block text-[4vw] font-medium leading-[0.9] tracking-[-0.06em]">
+                        {slide.num}
+                      </p>
                       <img
                         src={slide.image}
                         alt={slide.title}
-                        className="w-[25vw] rounded-sm object-cover"
+                        className="w-full h-[20vh] md:w-[20vw] md:h-[26vh] m-2 rounded-sm object-cover"
                       />
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
 
