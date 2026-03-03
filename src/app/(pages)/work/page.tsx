@@ -11,11 +11,98 @@ import Footer2 from "@/component/Footer2";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Aspect ratio per layout type
 const aspectClass = {
-  wide: "aspect-video", // 16:9  — landscape film / brand ad
-  tall: "aspect-[9/16]", // 9:16  — reel / short / portrait
+  wide: "aspect-video",
+  tall: "aspect-[9/16]",
 };
+
+type Project = (typeof projectsData)[number];
+
+function WorkCard({ project }: { project: Project }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const handleMouseEnter = () => {
+    if (!videoRef.current || !project.videoUrl) return;
+    videoRef.current.play().catch(() => {});
+  };
+
+  const handleMouseLeave = () => {
+    if (!videoRef.current) return;
+    videoRef.current.pause();
+    videoRef.current.currentTime = 0;
+  };
+
+  return (
+    <Link
+      href={`/work/${project.slug}`}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className="work-card group relative block overflow-hidden rounded-2xl bg-[#121212] mb-4 break-inside-avoid"
+    >
+      <div
+        className={`relative w-full ${
+          aspectClass[project.layout as keyof typeof aspectClass] ??
+          "aspect-video"
+        }`}
+      >
+        {/* Static thumbnail — always present */}
+        <Image
+          src={project.thumbnail}
+          alt={project.title}
+          fill
+          sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw"
+          className="object-cover opacity-90 transition-opacity duration-500"
+        />
+
+        {/* Video — loads lazily, fades in on hover */}
+        {project.videoUrl && (
+          <video
+            ref={videoRef}
+            src={project.videoUrl}
+            muted
+            loop
+            playsInline
+            preload="none"
+            className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          />
+        )}
+
+        {/* Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+
+        {/* Card content */}
+        <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
+          <span className="text-[11px] font-mono text-white/50 tracking-widest uppercase">
+            {project.year}
+          </span>
+          <h2 className="mt-1 text-lg md:text-xl font-bold text-white leading-snug">
+            {project.title}
+          </h2>
+          <p className="mt-1.5 text-sm text-white/55 line-clamp-2 translate-y-3 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-400 ease-out">
+            {project.description}
+          </p>
+        </div>
+
+        {/* Arrow badge */}
+        <div className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-400 translate-x-3 group-hover:translate-x-0">
+          <svg
+            className="w-3.5 h-3.5 text-white"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M7 17L17 7M17 7H7M17 7v10"
+            />
+          </svg>
+        </div>
+      </div>
+    </Link>
+  );
+}
 
 function WorkPage() {
   const headerRef = useRef<HTMLDivElement>(null);
@@ -83,60 +170,7 @@ function WorkPage() {
         `}</style>
 
         {projectsData.map((project) => (
-          <Link
-            key={project.slug}
-            href={`/work/${project.slug}`}
-            className="work-card group relative block overflow-hidden rounded-2xl bg-[#121212] mb-4 break-inside-avoid"
-          >
-            {/* Intrinsic box — height driven by aspect ratio */}
-            <div
-              className={`relative w-full ${
-                aspectClass[project.layout as keyof typeof aspectClass] ??
-                "aspect-video"
-              }`}
-            >
-              <Image
-                src={project.thumbnail}
-                alt={project.title}
-                fill
-                sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw"
-                className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-85 group-hover:opacity-100"
-              />
-
-              {/* Gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
-
-              {/* Card content */}
-              <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
-                <span className="text-[11px] font-mono text-white/50 tracking-widest uppercase">
-                  {project.year}
-                </span>
-                <h2 className="mt-1 text-lg md:text-xl font-bold text-white leading-snug">
-                  {project.title}
-                </h2>
-                <p className="mt-1.5 text-sm text-white/55 line-clamp-2 translate-y-3 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-400 ease-out">
-                  {project.description}
-                </p>
-              </div>
-
-              {/* Arrow badge */}
-              <div className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-400 translate-x-3 group-hover:translate-x-0">
-                <svg
-                  className="w-3.5 h-3.5 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M7 17L17 7M17 7H7M17 7v10"
-                  />
-                </svg>
-              </div>
-            </div>
-          </Link>
+          <WorkCard key={project.slug} project={project} />
         ))}
       </div>
 

@@ -276,7 +276,7 @@ export const servicesData = [
 
 export const projectsData = [
    {
-    slug: "documentary-urban",
+    slug: "documentary-urbans",
     title: "Urban Stories - Documentary",
     category: "YouTube",
     year: "2024",
