@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import Link from "next/link";
 import { aboutPageData, personalInfo } from "@/data/siteData";
+import SectionHeader from "@/component/SectionHeader";
 import Footer2 from "@/component/Footer2";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -55,19 +56,15 @@ function AboutPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#F1F1F1]">
+    <div className="min-h-screen bg-white">
       {/* Header */}
-      <div
+      <SectionHeader
         ref={headerRef}
-        className="max-w-[1200px] mx-auto pt-32 pb-16 px-6 md:px-16 text-center"
-      >
-        <p className="text-xs uppercase tracking-widest text-[#4E94C2] mb-3">
-          About
-        </p>
-        <h1 className="text-5xl md:text-7xl font-bold text-[#121212] leading-[0.95] tracking-[-0.04em] max-w-4xl mx-auto">
-          {aboutPageData.headline}
-        </h1>
-      </div>
+        label="About"
+        heading={aboutPageData.headline}
+        as="h1"
+        className="max-w-[1200px] mx-auto pt-32 pb-16 px-6 md:px-16"
+      />
 
       <div ref={contentRef} className="max-w-[1200px] mx-auto px-6 md:px-16">
         {/* Bio + Image */}
@@ -98,20 +95,18 @@ function AboutPage() {
         </div>
 
         {/* Philosophy */}
-        <div className="about-section py-24 border-t border-[#121212]/10 text-center">
-          <p className="text-xs uppercase tracking-widest text-[#4E94C2] mb-8">
-            Philosophy
-          </p>
-          <blockquote className="text-3xl md:text-5xl lg:text-6xl font-bold text-[#121212] leading-[1.1] max-w-4xl mx-auto">
-            &ldquo;{aboutPageData.philosophy}&rdquo;
-          </blockquote>
+        <div className="about-section py-24 border-t border-[#121212]/10">
+          <SectionHeader
+            label="Philosophy"
+            heading={<>&ldquo;{aboutPageData.philosophy}&rdquo;</>}
+            as="h2"
+            className="mb-0"
+          />
         </div>
 
         {/* Tools & Skills */}
-        <div className="about-section py-24 border-t border-[#121212]/10 text-center">
-          <p className="text-xs uppercase tracking-widest text-[#4E94C2] mb-12">
-            Tools & Expertise
-          </p>
+        <div className="about-section py-24 border-t border-[#121212]/10">
+          <SectionHeader label="Tools & Expertise" className="mb-12" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-8 max-w-4xl">
             {aboutPageData.tools.map((tool) => (
               <div key={tool.name}>
@@ -137,14 +132,7 @@ function AboutPage() {
         {/* Vision */}
         <div className="about-section py-24 border-t border-[#121212]/10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div className="text-center">
-              <p className="text-xs uppercase tracking-widest text-[#4E94C2] mb-3">
-                Vision
-              </p>
-              <h3 className="text-3xl md:text-4xl font-bold text-[#121212] leading-snug">
-                Where I&apos;m headed
-              </h3>
-            </div>
+            <SectionHeader label="Vision" heading="Where I'm headed" as="h3" />
             <div className="flex items-center">
               <p className="text-lg text-[#121212]/70 leading-relaxed">
                 {aboutPageData.vision}

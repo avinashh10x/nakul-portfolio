@@ -4,6 +4,7 @@ import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { projectsData } from "@/data/siteData";
+import SectionHeader from "@/component/SectionHeader";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -42,14 +43,11 @@ function FeaturedProjects() {
   return (
     <section ref={sectionRef} className="bg-white py-24 md:py-32">
       {/* Heading */}
-      <div className="max-w-[1200px] mx-auto px-6 md:px-16 mb-16 text-center">
-        <p className="text-xs uppercase tracking-widest text-[#4E94C2] mb-3">
-          Selected Work
-        </p>
-        <h2 className="text-5xl md:text-7xl font-bold text-[#121212] leading-[0.95] tracking-[-0.04em]">
-          Featured Projects
-        </h2>
-      </div>
+      <SectionHeader
+        label="Selected Work"
+        heading="Featured Projects"
+        className="max-w-[1200px] mx-auto px-6 md:px-16 mb-16"
+      />
 
       {/* Project Grid */}
       <div className="max-w-[1200px] mx-auto px-6 md:px-16 grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
@@ -85,10 +83,10 @@ function FeaturedProjects() {
 
               {/* Bottom content */}
               <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10">
-                <h3 className="text-white text-2xl md:text-4xl font-bold leading-tight tracking-[-0.02em]">
+                <h3 className="text-white text-2xl md:text-4xl font-bold leading-tight tracking-[-0.02em] mr-15 ">
                   {project.title}
                 </h3>
-                <p className="text-white/70 text-sm md:text-base mt-2 max-w-xl leading-relaxed opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0 transition-all duration-500">
+                <p className="text-white/70 text-sm md:text-base mt-2 max-w-xl leading-relaxed opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0 transition-all duration-500 mr-15">
                   {project.description}
                 </p>
               </div>

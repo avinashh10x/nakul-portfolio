@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { experienceData } from "@/data/siteData";
+import SectionHeader from "@/component/SectionHeader";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -102,13 +103,13 @@ function ExperienceSection() {
   return (
     <>
       {/* Heading scrolls away naturally before cards pin */}
-      <div className="bg-[#ffffff] pt-60 text-center text-black">
-        <h3 className="text-6xl font-bold">{experienceData.heading}</h3>
-        <br />
-        <p className="text-2xl max-w-2xl mx-auto">
-          {experienceData.subheading}
-        </p>
-      </div>
+      <SectionHeader
+        label="My Expertise"
+        heading={experienceData.heading}
+        subheading={experienceData.subheading}
+        subheadingClassName="text-black/50"
+        className="bg-[#ffffff] pt-60  px-6 md:px-16"
+      />
 
       <section className="relative">
         <div

@@ -60,9 +60,7 @@ function Footer() {
         <div className="relative px-6 h-screen w-full space-y-12 ">
           {/* Header */}
           <div className="flex justify-between w-full py-6">
-            <p className="uppercase tracking-[-0.01em] text-xs">
-              
-            </p>
+            <p className="uppercase tracking-[-0.01em] text-xs"></p>
             <p className="uppercase tracking-[-0.01em] text-xs"></p>
             <p className="uppercase tracking-[-0.01em] text-xs"></p>
             <p className="uppercase tracking-[-0.01em] text-xs"></p>
@@ -122,7 +120,7 @@ function Footer() {
               LinkedIn
             </p>
             <p className="uppercase tracking-[-0.01em] text-xs text-[rgb(205,205,205)]">
-              hello@nakul.com
+              hello@avinash.com
             </p>
             <p className="uppercase tracking-[-0.01em] text-xs text-[rgb(205,205,205)]">
               Mumbai
@@ -206,7 +204,7 @@ function Footer() {
               LinkedIn
             </p>
             <p className="uppercase tracking-[-0.01em] text-xs text-[#F1F1F1]">
-              hello@nakul.com
+              hello@avinash.com
             </p>
             <p className="uppercase tracking-[-0.01em] text-xs text-[#F1F1F1]">
               Mumbai

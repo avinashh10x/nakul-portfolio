@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
 import { servicesData, personalInfo } from "@/data/siteData";
+import SectionHeader from "@/component/SectionHeader";
 import Footer2 from "@/component/Footer2";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -110,23 +111,16 @@ function ServicesPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#F1F1F1]">
+    <div className="min-h-screen bg-white">
       {/* Header */}
-      <div
+      <SectionHeader
         ref={headerRef}
-        className="max-w-[1200px] mx-auto pt-32 pb-16 px-6 md:px-16 text-center"
-      >
-        <p className="text-xs uppercase tracking-widest text-[#4E94C2] mb-3">
-          What I Offer
-        </p>
-        <h1 className="text-5xl md:text-7xl font-bold text-[#121212] leading-[0.95] tracking-[-0.04em]">
-          Services
-        </h1>
-        <p className="mt-6 text-lg text-[#121212]/60 max-w-xl mx-auto">
-          End-to-end video editing and motion design services — from concept to
-          final delivery, tailored to your platform and audience.
-        </p>
-      </div>
+        label="What I Offer"
+        heading="Services"
+        subheading="End-to-end video editing and motion design services — from concept to final delivery, tailored to your platform and audience."
+        as="h1"
+        className="max-w-[1200px] mx-auto pt-32 pb-16 px-6 md:px-16"
+      />
 
       {/* Service Cards */}
       <div
@@ -198,18 +192,18 @@ function ServicesPage() {
       </div>
 
       {/* CTA Section */}
-      <div className="bg-[#4E94C2] py-24">
+      <div className=" py-24">
         <div className="max-w-[1200px] mx-auto px-6 md:px-16 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-black mb-6">
             Need something custom?
           </h2>
-          <p className="text-lg text-white/70 max-w-lg mx-auto mb-10">
+          <p className="text-lg text-black/70 max-w-lg mx-auto mb-10">
             Every project is unique. Let&apos;s discuss your specific needs and
             build a package that fits.
           </p>
           <Link
             href="/contact"
-            className="inline-block px-8 py-4 bg-white text-[#121212] rounded-full font-bold text-lg hover:bg-[#C4EF7A] transition-colors duration-300"
+            className="inline-block px-8 py-4 bg-[#121212] text-white rounded-full font-bold text-lg hover:bg-[#C4EF7A] hover:text-[#121212] transition-colors duration-300"
           >
             Let&apos;s Talk
           </Link>

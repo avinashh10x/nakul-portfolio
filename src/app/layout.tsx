@@ -14,9 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Nakul — Video Editor & Motion Designer",
+  title: "avinash — Video Editor & Motion Designer",
   description:
-    "Portfolio of Nakul — a video editor and motion designer crafting cinematic brand films, music videos, social reels, and 3D visuals.",
+    "Portfolio of avinash — a video editor and motion designer crafting cinematic brand films, music videos, social reels, and 3D visuals.",
 };
 
 export default function RootLayout({

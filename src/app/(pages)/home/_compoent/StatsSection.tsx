@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { statsData, testimonialsData } from "@/data/siteData";
+import SectionHeader from "@/component/SectionHeader";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -62,14 +63,14 @@ function StatsSection() {
   return (
     <>
       {/* Stats */}
-      <section ref={statsRef} className="bg-[#4E94C2] py-20 md:py-28">
+      <section ref={statsRef} className="bg-white py-20 md:py-28">
         <div className="max-w-[1200px] mx-auto px-6 md:px-16 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
           {statsData.map((stat, i) => (
             <div key={i} className="stat-item text-center">
-              <p className="text-5xl md:text-7xl font-bold text-white tracking-[-0.04em]">
+              <p className="text-5xl md:text-7xl font-bold text-[#121212] tracking-[-0.04em]">
                 {stat.value}
               </p>
-              <p className="text-white/70 text-sm md:text-base mt-2 uppercase tracking-wider">
+              <p className="text-[#121212]/70 text-sm md:text-base mt-2 uppercase tracking-wider">
                 {stat.label}
               </p>
             </div>
@@ -79,14 +80,11 @@ function StatsSection() {
 
       {/* Testimonials */}
       <section ref={testimonialsRef} className="bg-white py-24 md:py-32">
-        <div className="max-w-[1200px] mx-auto px-6 md:px-16 mb-16 text-center">
-          <p className="text-xs uppercase tracking-widest text-[#4E94C2] mb-3">
-            Client Love
-          </p>
-          <h2 className="text-5xl md:text-7xl font-bold text-[#121212] leading-[0.95] tracking-[-0.04em]">
-            What they say.
-          </h2>
-        </div>
+        <SectionHeader
+          label="Client Love"
+          heading="What they say."
+          className="max-w-[1200px] mx-auto px-6 md:px-16 mb-16"
+        />
 
         <div className="max-w-[1200px] mx-auto px-6 md:px-16 grid grid-cols-1 md:grid-cols-2 gap-6">
           {testimonialsData.map((t, i) => (

@@ -20,7 +20,7 @@ function Home() {
           <FeaturedProjects />
         </div>
         <ProcessSection />
-        {/* <StatsSection /> */}
+        <StatsSection />
         <FinalCTA />
         <Footer2 />
       </div>

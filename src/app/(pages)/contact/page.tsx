@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { contactPageData, socialLinks } from "@/data/siteData";
+import SectionHeader from "@/component/SectionHeader";
 import Footer2 from "@/component/Footer2";
 
 function ContactPage() {
@@ -57,22 +58,16 @@ function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F1F1F1]">
+    <div className="min-h-screen bg-white">
       {/* Header */}
-      <div
+      <SectionHeader
         ref={headerRef}
-        className="max-w-[1200px] mx-auto pt-32 pb-16 px-6 md:px-16 text-center"
-      >
-        <p className="text-xs uppercase tracking-widest text-[#4E94C2] mb-3">
-          Get in Touch
-        </p>
-        <h1 className="text-5xl md:text-7xl font-bold text-[#121212] leading-[0.95] tracking-[-0.04em] max-w-3xl mx-auto">
-          {contactPageData.headline}
-        </h1>
-        <p className="mt-6 text-lg text-[#121212]/60 max-w-xl mx-auto">
-          {contactPageData.subtext}
-        </p>
-      </div>
+        label="Get in Touch"
+        heading={contactPageData.headline}
+        subheading={contactPageData.subtext}
+        as="h1"
+        className="max-w-[1200px] mx-auto pt-32 pb-16 px-6 md:px-16"
+      />
 
       <div className="max-w-[1200px] mx-auto px-6 md:px-16 pb-24">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-16">

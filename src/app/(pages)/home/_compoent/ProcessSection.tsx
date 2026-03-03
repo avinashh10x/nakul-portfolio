@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { processData } from "@/data/siteData";
+import SectionHeader from "@/component/SectionHeader";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -63,17 +64,13 @@ function ProcessSection() {
       className="bg-white text-black py-24 md:py-32 overflow-hidden"
     >
       {/* Heading */}
-      <div className="max-w-[1200px] mx-auto px-6 md:px-16 mb-20 text-center">
-        <p className="text-xs uppercase tracking-widest text-[#4E94C2] mb-3">
-          The Process
-        </p>
-        <h2 className="text-5xl md:text-7xl font-bold leading-[0.95] tracking-[-0.04em]">
-          {processData.heading}
-        </h2>
-        <p className="text-black/50 text-lg mt-4 max-w-xl mx-auto">
-          {processData.subheading}
-        </p>
-      </div>
+      <SectionHeader
+        label="The Process"
+        heading={processData.heading}
+        subheading={processData.subheading}
+        subheadingClassName="text-black/50"
+        className="max-w-[1200px] mx-auto px-6 md:px-16 mb-20"
+      />
 
       {/* Steps — horizontal on desktop, stacked on mobile */}
       <div className="max-w-[1200px] mx-auto px-6 md:px-16">
