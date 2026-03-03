@@ -102,7 +102,7 @@ function ExperienceSection() {
   return (
     <>
       {/* Heading scrolls away naturally before cards pin */}
-      <div className="bg-[#ffffff] pt-96 text-center text-black">
+      <div className="bg-[#ffffff] pt-60 text-center text-black">
         <h3 className="text-6xl font-bold">{experienceData.heading}</h3>
         <br />
         <p className="text-2xl max-w-2xl mx-auto">
@@ -124,7 +124,7 @@ function ExperienceSection() {
             {slides.map((slide, index) => (
               <div
                 key={index}
-                className="experience-card absolute w-[90vw] h-[60vh] md:w-[60vw] md:h-[60vh]"
+                className="experience-card absolute w-[90vw] h-[60vh] md:w-[70vw] md:h-[60vh]"
                 style={{
                   transformStyle: "preserve-3d",
                   willChange: "transform",

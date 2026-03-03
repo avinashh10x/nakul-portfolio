@@ -162,32 +162,410 @@ export const socialLinks = [
   },
 ];
 
+// ─── FEATURED PROJECTS (HOME + WORK PAGE) ──────────────────
+export const projectsData = [
+  {
+    slug: "cinematic-reel-2025",
+    title: "Cinematic Reel 2025",
+    category: "Ads",
+    year: "2025",
+    thumbnail:
+      "https://images.unsplash.com/photo-1536240478700-b869070f9279?w=800&q=80",
+    heroImage:
+      "https://images.unsplash.com/photo-1536240478700-b869070f9279?w=1400&q=80",
+    description:
+      "A compilation of my best cinematic work from 2025 — featuring brand films, music videos, and documentary pieces.",
+    challenge:
+      "Condense a year's worth of diverse creative output into a cohesive 3-minute showreel that feels like a single narrative rather than a disjointed montage.",
+    approach:
+      "Mapped emotional beats like a short film — opening with impact, building through variety, peaking with the strongest piece, and closing with a quiet, memorable end.",
+    tools: ["Premiere Pro", "DaVinci Resolve", "After Effects"],
+    result:
+      "50K+ views on YouTube in the first week. 12 new client inquiries directly attributed to the reel.",
+    gallery: [
+      "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&q=80",
+      "https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=800&q=80",
+      "https://images.unsplash.com/photo-1611162616475-46b635cb6868?w=800&q=80",
+    ],
+    videoUrl:
+      "https://framerusercontent.com/assets/vByUTRpjIKiQC9dZga6fw6PQLM.mp4",
+    featured: true,
+    layout: "wide" as const,
+  },
+  {
+    slug: "flavour-co-brand-film",
+    title: "Flavour Co. Brand Film",
+    category: "Ads",
+    year: "2025",
+    thumbnail:
+      "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&q=80",
+    heroImage:
+      "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1400&q=80",
+    description:
+      "A visually rich brand film blending slow-motion food photography with kinetic typography to convey warmth and authenticity.",
+    challenge:
+      "The client had no existing visual identity. The brief was simply 'make us feel premium' — with only raw product footage and no script.",
+    approach:
+      "Created a moodboard-first workflow: defined color palette, pacing rhythm, and typography before touching the footage. Built the story around sensory moments.",
+    tools: ["Premiere Pro", "After Effects", "Photoshop"],
+    result:
+      "Awarded 'Best Brand Film' at a regional ad festival. 2.3M impressions across social platforms.",
+    gallery: [
+      "https://images.unsplash.com/photo-1536240478700-b869070f9279?w=800&q=80",
+      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80",
+    ],
+    featured: true,
+    layout: "tall" as const,
+  },
+  {
+    slug: "neon-nights-music-video",
+    title: "Neon Nights — Music Video",
+    category: "YouTube",
+    year: "2024",
+    thumbnail:
+      "https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=800&q=80",
+    heroImage:
+      "https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=1400&q=80",
+    description:
+      "An electrifying music video with neon-drenched visuals, rapid cuts, and custom motion graphics.",
+    challenge:
+      "The artist wanted a video that matched the intensity of a live concert — but the entire shoot was done in a small studio with green screen.",
+    approach:
+      "Designed 15 unique 3D environments in Blender, synced every cut to the beat map, and layered custom particle effects over the performance footage.",
+    tools: ["Premiere Pro", "After Effects", "Blender"],
+    result: "1.2M views on YouTube. Featured on two major music blogs.",
+    gallery: [
+      "https://images.unsplash.com/photo-1611162616475-46b635cb6868?w=800&q=80",
+      "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&q=80",
+      "https://images.unsplash.com/photo-1536240478700-b869070f9279?w=800&q=80",
+    ],
+    featured: true,
+    layout: "wide" as const,
+  },
+  {
+    slug: "urban-stories-documentary",
+    title: "Urban Stories — Documentary",
+    category: "YouTube",
+    year: "2024",
+    thumbnail:
+      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80",
+    heroImage:
+      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1400&q=80",
+    description:
+      "A mini-documentary exploring the creative underground of Mumbai with handheld footage and natural light.",
+    challenge:
+      "12 hours of raw handheld footage, no script, multiple interview subjects with contradicting narratives.",
+    approach:
+      "Built a paper edit first — transcribed all interviews, found the emotional throughline, then structured a three-act narrative around the strongest stories.",
+    tools: ["DaVinci Resolve", "Premiere Pro"],
+    result:
+      "Selected for two independent film festivals. Client used it as their primary brand asset for 6 months.",
+    gallery: [
+      "https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=800&q=80",
+      "https://images.unsplash.com/photo-1611162616475-46b635cb6868?w=800&q=80",
+    ],
+    featured: true,
+    layout: "tall" as const,
+  },
+  {
+    slug: "product-vis-3d",
+    title: "Product Visualisation — 3D",
+    category: "Reels",
+    year: "2024",
+    thumbnail:
+      "https://images.unsplash.com/photo-1611162616475-46b635cb6868?w=800&q=80",
+    heroImage:
+      "https://images.unsplash.com/photo-1611162616475-46b635cb6868?w=1400&q=80",
+    description:
+      "Photorealistic 3D product renders and animated turntables for an e-commerce brand.",
+    challenge:
+      "The client needed 50 product shots but only had 3 physical prototypes — and a 2-week deadline.",
+    approach:
+      "Built accurate 3D models from reference photos, used HDRI lighting rigs for photorealism, and automated the turntable render pipeline in Blender.",
+    tools: ["Blender", "Substance Painter", "After Effects"],
+    result:
+      "40% increase in product page conversion rate. Client renewed for quarterly content.",
+    gallery: [
+      "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&q=80",
+      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80",
+      "https://images.unsplash.com/photo-1536240478700-b869070f9279?w=800&q=80",
+    ],
+    featured: false,
+    layout: "wide" as const,
+  },
+  {
+    slug: "social-reels-package",
+    title: "Social Reels Package",
+    category: "Reels",
+    year: "2025",
+    thumbnail:
+      "https://images.unsplash.com/photo-1533750516457-a7f992034fec?w=800&q=80",
+    heroImage:
+      "https://images.unsplash.com/photo-1533750516457-a7f992034fec?w=1400&q=80",
+    description:
+      "A series of high-energy social media reels combining trending transitions, bold captions, and punchy sound design.",
+    challenge:
+      "Create 30 reels per month that feel unique — without them blending into the sea of generic social content.",
+    approach:
+      "Developed a modular template system with interchangeable intro hooks, transition packs, and CTA endings — keeping consistency while allowing creative variation.",
+    tools: ["Premiere Pro", "Photoshop", "CapCut"],
+    result:
+      "Average 200K views per reel. Brand's Instagram grew from 5K to 45K followers in 4 months.",
+    gallery: [
+      "https://images.unsplash.com/photo-1611162616475-46b635cb6868?w=800&q=80",
+      "https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=800&q=80",
+    ],
+    featured: false,
+    layout: "tall" as const,
+  },
+  {
+    slug: "eternal-vows-wedding",
+    title: "Eternal Vows — Wedding Film",
+    category: "Weddings",
+    year: "2025",
+    thumbnail:
+      "https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80",
+    heroImage:
+      "https://images.unsplash.com/photo-1519741497674-611481863552?w=1400&q=80",
+    description:
+      "A cinematic wedding film that captures the raw emotion and intimate moments of a destination wedding.",
+    challenge:
+      "8 hours of multi-camera footage across two days, outdoor lighting shifts, and emotional moments that couldn't be re-shot.",
+    approach:
+      "Synced all cameras in a multi-cam timeline, color-matched across lighting conditions, and built the narrative around the couple's personal vows.",
+    tools: ["DaVinci Resolve", "Premiere Pro", "After Effects"],
+    result:
+      "Couple shared it on social media — 500K organic views. Led to 8 new wedding bookings.",
+    gallery: [
+      "https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80",
+      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80",
+    ],
+    featured: false,
+    layout: "tall" as const,
+  },
+];
+
+// ─── PROCESS STEPS ──────────────────────────────────────────
+export const processData = {
+  heading: "How I Work",
+  subheading: "Every project follows a proven creative process.",
+  steps: [
+    {
+      num: "01",
+      title: "Understand the Story",
+      description:
+        "I start by listening — understanding your brand, audience, and the emotion you want to evoke. No editing happens before the story is clear.",
+    },
+    {
+      num: "02",
+      title: "Structure the Narrative",
+      description:
+        "I map out the pacing, beats, and flow. Whether it's a 15-second reel or a 10-minute film, every second has a purpose.",
+    },
+    {
+      num: "03",
+      title: "Craft the Emotion",
+      description:
+        "This is where the magic happens — precise cuts, sound design, color grading, and motion graphics that make the viewer feel something.",
+    },
+    {
+      num: "04",
+      title: "Deliver Impact",
+      description:
+        "Final delivery optimized for your platform — YouTube, Instagram, cinema, or web. Every format, every aspect ratio, pixel-perfect.",
+    },
+  ],
+};
+
+// ─── STATS ──────────────────────────────────────────────────
+export const statsData = [
+  { value: "80+", label: "Projects Completed" },
+  { value: "3+", label: "Years Experience" },
+  { value: "10M+", label: "Views Generated" },
+  { value: "40+", label: "Happy Clients" },
+];
+
+// ─── TESTIMONIALS ───────────────────────────────────────────
+export const testimonialsData = [
+  {
+    quote:
+      "He didn't just edit our video — he made us feel something we didn't even know was in the footage.",
+    name: "Priya Sharma",
+    role: "Founder, Flavour Co.",
+    result: "2.3M impressions",
+  },
+  {
+    quote:
+      "The fastest turnaround I've ever seen without compromising quality. Our YouTube channel grew 300% after working with him.",
+    name: "Rahul Mehta",
+    role: "YouTuber, 500K subs",
+    result: "300% channel growth",
+  },
+  {
+    quote:
+      "Our wedding film made everyone cry — even people who weren't at the wedding. That's the level of storytelling here.",
+    name: "Ananya & Vikram",
+    role: "Wedding Clients",
+    result: "500K organic views",
+  },
+  {
+    quote:
+      "We gave him raw product photos and got back cinematic 3D renders that outperformed our studio photography.",
+    name: "Karan Desai",
+    role: "E-Commerce Director",
+    result: "40% conversion increase",
+  },
+];
+
+// ─── SERVICES ───────────────────────────────────────────────
+export const servicesData = [
+  {
+    title: "YouTube Editing",
+    forWho: "YouTubers, Creators, Educators",
+    description:
+      "End-to-end YouTube video editing — from raw footage to upload-ready content. Includes cuts, transitions, sound design, color correction, thumbnails, and SEO-optimized titles.",
+    includes: [
+      "Jump-cut & narrative editing",
+      "Custom transitions & motion graphics",
+      "Sound design & music sync",
+      "Color correction & grading",
+      "Thumbnail design",
+      "Subtitle & caption integration",
+    ],
+    timeline: "3–5 business days per video",
+    icon: "play",
+  },
+  {
+    title: "Brand Commercials",
+    forWho: "Startups, D2C Brands, Agencies",
+    description:
+      "Cinematic brand films and product commercials that make your brand unforgettable. From concept to final cut — every frame designed to convert.",
+    includes: [
+      "Cinematic editing & pacing",
+      "Color grading (DaVinci Resolve)",
+      "Motion graphics & titles",
+      "Sound design & voiceover sync",
+      "Multi-format delivery (16:9, 9:16, 1:1)",
+    ],
+    timeline: "5–10 business days",
+    icon: "film",
+  },
+  {
+    title: "Social Media Reels",
+    forWho: "Brands, Influencers, Agencies",
+    description:
+      "Scroll-stopping short-form content for Instagram, TikTok, and YouTube Shorts. Trend-aware, fast-paced, and designed for engagement.",
+    includes: [
+      "Trending transition styles",
+      "Bold text & caption overlays",
+      "Sound design & beat sync",
+      "Platform-specific optimization",
+      "Batch editing (10–30 reels/month)",
+    ],
+    timeline: "1–2 business days per reel",
+    icon: "reels",
+  },
+  {
+    title: "Wedding Films",
+    forWho: "Couples, Wedding Planners",
+    description:
+      "Cinematic wedding films that capture the emotion, beauty, and story of your special day. Multi-camera editing with professional color grading.",
+    includes: [
+      "Multi-camera sync & editing",
+      "Cinematic color grading",
+      "Music & sound design",
+      "Highlight reel (3–5 min)",
+      "Full ceremony edit",
+      "Social media teasers",
+    ],
+    timeline: "10–15 business days",
+    icon: "heart",
+  },
+];
+
+// ─── ABOUT PAGE ─────────────────────────────────────────────
+export const aboutPageData = {
+  headline: "I turn raw footage into stories worth watching.",
+  bio: [
+    "I'm a video editor and motion designer based in Mumbai with over 3 years of experience crafting visual narratives for brands, artists, and creators.",
+    "My journey started with a fascination for how a single cut can change the entire emotion of a scene. Since then, I've edited everything from brand films and music videos to documentaries and social content.",
+    "I believe great editing is invisible — it guides the viewer's emotion without them ever noticing the craft behind it. That's the standard I hold every project to.",
+  ],
+  philosophy:
+    "Editing is not cutting clips. It's shaping emotion. It's rhythm. It's impact.",
+  profileImage: "/Layer 0.png",
+  tools: [
+    { name: "Premiere Pro", level: 95 },
+    { name: "After Effects", level: 90 },
+    { name: "DaVinci Resolve", level: 85 },
+    { name: "Blender", level: 80 },
+    { name: "Photoshop", level: 85 },
+    { name: "Cinema 4D", level: 70 },
+  ],
+  vision:
+    "I want to build a creative studio where story always comes first — where every brand, creator, and artist gets the kind of editing that makes people stop scrolling and start feeling.",
+};
+
+// ─── CONTACT PAGE ───────────────────────────────────────────
+export const contactPageData = {
+  headline: "Let's create something unforgettable.",
+  subtext:
+    "Have a project in mind? I'd love to hear about it. Drop me a message and let's bring your vision to life.",
+  email: "avinash@example.com",
+  phone: "+91 9876543210",
+  location: "Mumbai, India",
+  availability: "Available for freelance — Q2 2026",
+  projectTypes: [
+    "YouTube Editing",
+    "Brand Commercial",
+    "Social Media Reels",
+    "Wedding Film",
+    "Music Video",
+    "Other",
+  ],
+  budgetRanges: [
+    "Under ₹25,000",
+    "₹25,000 – ₹50,000",
+    "₹50,000 – ₹1,00,000",
+    "₹1,00,000+",
+    "Let's discuss",
+  ],
+};
+
+// ─── ME SECTION (HOME PAGE) ─────────────────────────────────
+export const meData = {
+  heading: "Its me",
+  description:
+    "I'm a video editor and motion designer who lives and breathes visual storytelling. With 3+ years behind the timeline, I've crafted brand films, music videos, reels, and 3D visualisations — always obsessing over the perfect cut, the right colour, and the tiniest details that make a project feel alive.",
+  image: "/Layer 0.png",
+  name: "Nakul",
+};
+
 // ─── FOOTER MENUS ───────────────────────────────────────────
 export const footerMenus = [
   {
     title: "About me",
     links: [
-      { label: "My Story", url: "#" },
-      { label: "Skills", url: "#" },
-      { label: "Experience", url: "#" },
+      { label: "My Story", url: "/about" },
+      { label: "Skills", url: "/#skills" },
+      { label: "Services", url: "/services" },
     ],
   },
   {
-    title: "Services",
+    title: "Work",
     links: [
-      { label: "Video Editing", url: "#" },
-      { label: "Motion Graphics", url: "#" },
-      { label: "3D Design", url: "#" },
-      { label: "Color Grading", url: "#" },
+      { label: "All Projects", url: "/work" },
+      { label: "Brand Films", url: "/work" },
+      { label: "Music Videos", url: "/work" },
+      { label: "Reels & Ads", url: "/work" },
     ],
   },
   {
-    title: "Projects",
+    title: "Connect",
     links: [
-      { label: "Short Films", url: "#" },
-      { label: "Music Videos", url: "#" },
-      { label: "Brand Films", url: "#" },
-      { label: "Reels & Ads", url: "#" },
+      { label: "Contact", url: "/contact" },
+      { label: "Instagram", url: "#" },
+      { label: "YouTube", url: "#" },
     ],
   },
 ];
